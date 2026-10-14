@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OneWM studies reciprocal benefits between world prediction and action generation under unified causal training.">
+  <meta name="theme-color" content="#faf8f5">
+  <title>OneWM — Can World and Action Modeling Benefit Each Other under Unified Causal Training?</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="research.css">
+  <link rel="stylesheet" href="dreaming.css">
+  <script src="app.js" defer></script>
+  <script src="gallery.js" defer></script>
+  <script src="diagrams.js" defer></script>
+  <script src="dreaming.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#story">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="OneWM home"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M4 18C4 5 23 4 29 15S16 34 8 25 15 4 26 8 36 29 22 29"/></svg><span>One<span class="rose">WM</span></span></a>
+    <nav aria-label="Main navigation"><a href="#story">The idea</a><a href="#method">How it works</a><a href="#experiments">Real world</a><a href="#predictions">Imagined futures</a><a href="#dreaming">Dream & act</a></nav>
+    <a class="header-link" href="#results">Results <span>↗</span></a>
+  </header>
+  <main>
+    <section class="hero page-width" id="top">
+      <div class="hero-copy">
+        <p class="hero-wordmark">One<span>WM</span><svg class="title-spark" viewBox="0 0 50 50" aria-hidden="true"><path d="M25 2v46M2 25h46M9 9l32 32M9 41 41 9"/></svg></p>
+        <h1 class="hero-paper-title">Can World and Action Modeling Benefit <em>Each Other</em> <span class="hero-title-context">under Unified Causal Training?</span></h1>
+        <div class="hero-resources" role="group" aria-label="Project resources">
+          <a class="resource-link" href="" aria-disabled="true" title="Link coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.14c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.16 1.18a11 11 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.14c0 .31.21.67.79.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg><span>GitHub</span></a>
+          <a class="resource-link" href="" aria-disabled="true" title="Link coming soon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8Z"/><path d="M14 3v5h5M8 12h8M8 16h6"/></svg><span>Paper</span></a>
+          <a class="resource-link" href="" aria-disabled="true" title="Link coming soon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 3 14 18M18 3l-5.5 7M10.5 13 5 21"/><path d="m8 3 11 14" opacity=".4"/></svg><span>arXiv</span></a>
+        </div>
+        <p class="hero-intro">One causal model learns to predict the world<br> and act in it.</p>
+        <div class="hero-actions"><a class="button primary" href="#story">Explore the idea <span>↗</span></a><a class="text-link" href="#experiments"><span class="play-small">▶</span> See it in action</a></div>
+      </div>
+      <div class="hero-art" aria-label="Anime illustration of a robot learning to manipulate blocks">
+        <div class="art-frame"><img src="assets/art/hero.png" alt="An illustrated white robot arm arranging rose and blue blocks in a sunlit studio" fetchpriority="high" width="1536" height="1024"><div class="art-grain"></div></div>
+        <span class="art-corner top-left"></span><span class="art-corner bottom-right"></span>
+        <div class="floating-note"><svg viewBox="0 0 80 40" aria-hidden="true"><path d="M5 28C22 0 32 40 47 14S68 6 75 10"/><circle cx="47" cy="14" r="4"/></svg><span>imagine <i>↔</i> act</span></div>
+      </div>
+    </section>
+    <div class="authors-block page-width">
+      <p><a href="https://selen-suyue.github.io/" target="_blank" rel="noopener">Yue Su<sup>1,2,6,*</sup></a><a href="https://github.com/The-kamisato-Sii" target="_blank" rel="noopener">Bokai Lin<sup>2,4,*</sup></a><a href="https://summerwxk.github.io/" target="_blank" rel="noopener">Xinkai Wang<sup>2,4,*</sup></a><a href="https://lin-shan.com/" target="_blank" rel="noopener">Chubin Zhang<sup>3</sup></a><a href="https://xiangnan-wu.github.io/" target="_blank" rel="noopener">Xiangnan Wu<sup>5</sup></a><a href="https://itheresaapocalypse.github.io/" target="_blank" rel="noopener">Kuan Zhang<sup>3</sup></a><a href="https://huggingface.co/Wayne-King" target="_blank" rel="noopener">Weiyang Jin<sup>1</sup></a><a href="https://yujiwen.github.io/" target="_blank" rel="noopener">Jiwen Yu<sup>1</sup></a><a href="https://yimingli-page.github.io/" target="_blank" rel="noopener">Yiming Li<sup>3</sup></a><a href="https://www.mvig.org/" target="_blank" rel="noopener">Cewu Lu<sup>2,4</sup></a><a href="https://lixiny.github.io/" target="_blank" rel="noopener">Lixin Yang<sup>2,4,†</sup></a><a href="https://xh-liu.github.io/" target="_blank" rel="noopener">Xihui Liu<sup>1,†</sup></a></p>
+      <div class="institutions"><span><sup>1</sup> MMLab@HKU</span><span><sup>2</sup> MVIG@SJTU</span><span><sup>3</sup> THU</span><span><sup>4</sup> SII</span><span><sup>5</sup> UCAS</span><span><sup>6</sup> IAAI</span><small>* Equal contribution &nbsp; † Corresponding authors</small></div>
+      <div class="institution-logos" aria-label="Research affiliations"><a href="https://mmlab.hk/" target="_blank" rel="noopener" aria-label="HKU MMLab"><img src="assets/logos/hku-mmlab-lockup.png" alt="HKU MMLab" width="861" height="269"></a><a href="https://github.com/Interactive-Active-AI" target="_blank" rel="noopener" aria-label="Interactive and Active AI"><img class="iaai-logo" src="assets/logos/iaai.png" alt="IAAI" width="1254" height="1254"><span class="iaai-wordmark">IAAI<small>Interactive & Active AI</small></span></a></div>
+    </div>
+
+    <section class="story-section page-width section-space" id="story">
+      <div class="section-heading"><div><p class="chapter">01 / THE IDEA</p><h2 class="section-title">Prediction and control.<br> <em>A two-way relationship.</em></h2></div><p>A world model learns what happens when a robot acts.<br> A policy learns which action to take.<br> <strong>Can learning one help the other?</strong></p></div>
+      <figure class="research-figure intro-figure" aria-labelledby="intro-title">
+        <div class="diagram-topline"><div><h3 id="intro-title">How much action is known?</h3></div><button class="motion-control" type="button" aria-pressed="false">Ⅱ Pause</button></div>
+        <div class="attention-comparison">
+          <article class="attention-card"><div class="attention-title"><h4>World model</h4><span>All-clean actions</span></div><div class="attention-matrix" data-attention="clean" role="img" aria-label="World model causal attention with clean action keys"></div><p>Predict the effect of known actions.</p></article>
+          <article class="attention-card featured"><div class="attention-title"><h4>OneWM</h4><span id="known-action-ratio">Clean + noisy</span></div><div class="attention-matrix" data-attention="unified" role="img" aria-label="OneWM causal attention with flexible clean and noisy action keys"></div><p>Learn world prediction and action together.</p></article>
+          <article class="attention-card"><div class="attention-title"><h4>WAM<sub>noisy</sub></h4><span>All-noisy actions</span></div><div class="attention-matrix" data-attention="noisy" role="img" aria-label="World action model causal attention with noisy action keys"></div><p>Predict with noisy action conditions.</p></article>
+          <article class="attention-card"><div class="attention-title"><h4>WAM<sub>mask</sub></h4><span>Actions masked</span></div><div class="attention-matrix" data-attention="masked" role="img" aria-label="World action model whose video queries cannot attend to action keys"></div><p>Predict without reading action tokens.</p></article>
+        </div>
+        <div class="attention-footer"><div class="diagram-legend"><span><i class="key-clean"></i>Clean action</span><span><i class="key-noisy"></i>Noisy action</span><span><i class="key-allowed"></i>Allowed</span><span><i class="key-masked"></i>Masked</span></div><span>Rows: query · Columns: key / value</span></div>
+        <div class="conditioning-strip"><span>OneWM action conditioning</span><div class="regime-switch" role="group" aria-label="Intro action conditioning"><button type="button" data-conditioning="clean" aria-pressed="false">All-clean</button><button type="button" data-conditioning="partial" aria-pressed="true">Partial-clean</button><button type="button" data-conditioning="noisy" aria-pressed="false">All-noisy</button></div></div>
+        <figcaption>Outlined cells show the action-to-video connections. Every configuration preserves temporal causality.</figcaption>
+      </figure>
+      <div class="reciprocal-summary"><div><span class="result-direction">WORLD → ACTION</span><p>Clean-action prediction strengthens <strong>control and generalization.</strong></p></div><span class="reciprocal-symbol" aria-hidden="true">⇄</span><div><span class="result-direction blue-text">ACTION → WORLD</span><p>Learning actions improves <strong>future-video prediction.</strong></p></div></div>
+    </section>
+
+    <section class="method-section section-space" id="method"><div class="page-width">
+      <div class="section-heading"><div><p class="chapter">02 / HOW IT WORKS</p><h2 class="section-title">One architecture.<br> <em>Three ways to condition.</em></h2></div><p>Actions are both conditions for prediction<br> and targets for learning.</p></div>
+      <figure class="research-figure pipeline-figure" aria-labelledby="pipeline-title">
+        <div class="diagram-topline"><div><h3 id="pipeline-title">Two experts. One causal conversation.</h3></div><button class="motion-control" type="button" aria-pressed="false">Ⅱ Pause</button></div>
+        <div class="pipeline-scroll"><svg class="pipeline" viewBox="0 0 1040 340" role="img" aria-labelledby="pipeline-svg-title pipeline-svg-desc">
+          <title id="pipeline-svg-title">Animated OneWM training pipeline</title><desc id="pipeline-svg-desc">A VAE encodes video frames, retaining a clean observed prefix and adding noise to future latents. Action chunks are embedded. Separate video and action experts exchange information through causal joint attention. Both experts receive the same instruction through their own text attention and feed-forward blocks. The action regime can be changed below.</desc>
+          <defs><marker id="arrow-video" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#9bbddd"/></marker><marker id="arrow-action" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#aaa1b2"/></marker><pattern id="latent-noise" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#edf0ed"/><path d="M0 7L7 0" stroke="#b3c4cb" stroke-width="2"/></pattern><pattern id="action-noise" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#f5f0fa"/><path d="M0 7L7 0" stroke="#b5a6c5" stroke-width="2"/></pattern></defs>
+          <rect x="224" y="48" width="638" height="116" rx="17" class="video-lane"/><rect x="224" y="203" width="638" height="116" rx="17" class="action-lane"/>
+          <text x="243" y="72" class="lane-title video-text">VIDEO EXPERT</text><text x="243" y="306" class="lane-title action-text">ACTION EXPERT</text>
+          <g class="pipeline-input"><text x="56" y="48" class="stage-label">Frames</text><rect x="34" y="64" width="58" height="58" rx="7" class="frame-back"/><rect x="26" y="70" width="58" height="58" rx="7" class="frame-back"/><image href="assets/real/stacking.jpg" x="14" y="80" width="63" height="43" preserveAspectRatio="xMidYMid slice"/><rect x="14" y="80" width="63" height="43" rx="3" fill="none" stroke="#91a5ac"/><text x="55" y="149" class="svg-note">clean prefix</text></g>
+          <path d="M92 105H131M177 105H245" class="pipeline-wire video-wire"/><path d="M137 80L177 94V116L137 130Z" class="vae-shape"/><text x="156" y="149" class="svg-note">VAE</text><circle cx="202" cy="105" r="13" class="noise-circle"/><text x="202" y="110" class="noise-plus">+</text><text x="202" y="65" class="noise-epsilon">ε</text><path d="M202 72V88" class="noise-wire"/>
+          <g class="qkv-block"><rect x="246" y="85" width="109" height="47" rx="8" class="video-node"/><text x="300" y="105" class="node-title">Q / K / V</text></g>
+          <path d="M355 108H385Q400 108 400 128V159H420" class="pipeline-wire video-wire"/>
+          <g class="causal-hub"><rect x="420" y="121" width="174" height="128" rx="17"/><text x="507" y="148" class="node-title">Joint attention</text><path d="M473 190C457 169 482 161 505 184S548 204 544 182 520 168 505 184 482 211 473 190" class="hub-loop"/><text x="507" y="231" class="svg-note">TEMPORALLY CAUSAL</text></g>
+          <path d="M594 159H610Q623 159 623 143V108H650M806 108H908" class="pipeline-wire video-wire"/>
+          <g><rect x="650" y="85" width="156" height="47" rx="8" class="video-node"/><text x="728" y="105" class="node-title">Text attention</text><text x="728" y="122" class="svg-note">+ feed-forward</text></g>
+          <g class="language-node"><rect x="647" y="4" width="162" height="32" rx="16"/><text x="728" y="25">Instruction ℓ</text><path d="M728 36V79" class="language-wire"/><path d="M809 20H874Q887 20 887 35V180Q887 189 876 189H728V228" class="language-wire"/></g>
+          <g class="future-output"><text x="963" y="62" class="stage-label">Future latents</text><rect x="919" y="80" width="24" height="47" rx="5" class="observed-latent"/><rect x="949" y="80" width="24" height="47" rx="5" class="future-latent"/><rect x="979" y="80" width="24" height="47" rx="5" class="future-latent delay"/><text x="963" y="150" class="svg-note">prefix retained</text></g>
+          <g class="action-input"><text x="61" y="214" class="stage-label">Action chunk</text><path d="M20 270L37 250 54 263 73 234 92 249" class="input-trajectory"/><circle cx="20" cy="270" r="4"/><circle cx="37" cy="250" r="4"/><circle cx="54" cy="263" r="4"/><circle cx="73" cy="234" r="4"/><circle cx="92" cy="249" r="4"/><text x="55" y="303" class="svg-note" id="pipeline-action-label">clean + noisy</text></g>
+          <path d="M102 260H144M183 260H246" class="pipeline-wire action-wire"/><path d="M144 235L183 248V271L144 284Z" class="embed-shape"/><text x="164" y="303" class="svg-note">Embed</text>
+          <g class="qkv-block"><rect x="246" y="236" width="109" height="47" rx="8" class="action-node"/><text x="300" y="256" class="node-title">Q / K / V</text></g>
+          <path d="M355 260H385Q400 260 400 242V214H420M594 214H610Q623 214 623 233V260H650M806 260H908" class="pipeline-wire action-wire"/>
+          <g><rect x="650" y="236" width="156" height="47" rx="8" class="action-node"/><text x="728" y="256" class="node-title">Text attention</text><text x="728" y="273" class="svg-note">+ feed-forward</text></g>
+          <g class="action-output"><text x="963" y="214" class="stage-label">Action chunk</text><path d="M919 279C939 272 947 245 963 245S991 252 1008 261"/><circle cx="919" cy="279" r="4"/><circle cx="940" cy="261" r="4"/><circle cx="963" cy="245" r="4"/><circle cx="986" cy="252" r="4"/><circle cx="1008" cy="261" r="4"/><text x="963" y="303" class="svg-note" id="pipeline-output-label">condition + target</text></g>
+        </svg></div>
+        <div class="pipeline-regimes"><div class="regime-narrative"><h4 id="regime-title">Know the beginning. Learn the rest.</h4><p id="regime-description">A clean prefix conditions future-video prediction and denoising of the remaining action suffix.</p></div><div class="regime-demo"><div class="regime-switch" role="group" aria-label="Pipeline action conditioning"><button type="button" data-conditioning="clean" aria-pressed="false">All-clean</button><button type="button" data-conditioning="partial" aria-pressed="true">Partial-clean</button><button type="button" data-conditioning="noisy" aria-pressed="false">All-noisy</button></div><div class="construction-tokens" aria-label="Four illustrative action chunks"><span>A₁</span><span>A₂</span><span>A₃</span><span>A₄</span></div><div class="construction-labels"><span>Clean condition</span><span>Noisy denoising target</span></div></div></div>
+        <figcaption>The observed video stays clean. Both experts read the same instruction through their own text attention.</figcaption>
+      </figure>
+
+    </div></section>
+
+    <section class="experiments-section section-space" id="experiments">
+      <div class="page-width">
+        <div class="section-heading"><div><p class="chapter">03 / IN THE REAL WORLD</p><h2 class="section-title">From imagining<br> to <em>doing.</em></h2></div><p>Precise placement. Careful alignment.<br> Everyday manipulation, on a real robot.</p></div>
+        <div class="real-grid">
+          <article class="real-card"><div class="real-video-wrap"><video id="video-stacking" controls playsinline preload="metadata" poster="assets/real/stacking.jpg" aria-label="Real robot stacking three colored blocks"><source src="assets/real/stacking.mp4" type="video/mp4"></video><span class="video-index">01</span></div><div class="real-caption"><h3>Build, one block at a time.</h3></div></article>
+          <article class="real-card"><div class="real-video-wrap"><video id="video-storage" controls playsinline preload="metadata" poster="assets/real/storage.jpg" aria-label="Real robot inserting a blue block into a storage unit"><source src="assets/real/storage.mp4" type="video/mp4"></video><span class="video-index">02</span></div><div class="real-caption"><h3>Find the perfect fit.</h3></div></article>
+          <article class="real-card"><div class="real-video-wrap"><video id="video-breakfast" controls playsinline preload="metadata" poster="assets/real/breakfast.jpg" aria-label="Real robot plating toast and a fried egg"><source src="assets/real/breakfast.mp4" type="video/mp4"></video><span class="video-index">03</span></div><div class="real-caption"><h3>A little breakfast ritual.</h3></div></article>
+        </div>
+        <p class="section-note">Full robot recordings · Original speed · Silent</p>
+      </div>
+    </section>
+
+    <section class="prediction-section page-width section-space" id="predictions">
+      <div class="section-heading"><div><p class="chapter">04 / IMAGINED FUTURES</p><h2 class="section-title">An action.<br> <em>And the world it changes.</em></h2></div><p>Watch how the predicted future follows a sequence of actions.</p></div>
+      <div class="gallery-toolbar"><div class="gallery-label"><span id="gallery-count">Prediction examples</span></div><div class="gallery-tools"><button id="play-visible" class="quiet-button" type="button">▶ Play all</button><label class="sr-only" for="gallery-speed">Prediction playback speed</label><select id="gallery-speed" aria-label="Prediction playback speed"><option value="0.5" selected>0.5×</option><option value="1">1×</option><option value="0.25">0.25×</option></select><nav class="gallery-pagination" id="gallery-pages" aria-label="Example pages"></nav></div></div>
+      <div class="prediction-gallery" id="prediction-gallery" aria-busy="true" aria-label="Three action-conditioned prediction examples"><p>Loading recorded examples…</p></div>
+      <p class="section-note">Same actions, two futures. Drag to rotate the recorded trajectory; scrub to follow the motion.</p>
+      <details class="technical-note"><summary>About the videos and actions <span>+</span></summary><p>Each clip starts with an observed frame, followed by eight predictions. Reference video and conditioning actions come from the same sample. The 3D path shows recorded end-effector positions in metres; it is not a predicted path. Action values are raw controller commands, not displacements in metres. Sample details include timing and model information.</p></details>
+    </section>
+
+    <section class="dream-section" id="dreaming" aria-labelledby="dream-title" aria-busy="true">
+      <div class="dream-sparks" aria-hidden="true"><span>✧</span><span>✦</span><span>✧</span></div>
+      <div class="page-width">
+        <button class="dream-effects-control" type="button" aria-pressed="false">Ⅱ Pause effects</button>
+        <div class="dream-heading">
+          <div><p class="chapter">05 / A NEW FINDING</p><h2 id="dream-title">Dream, act, <em>repeat.</em></h2></div>
+          <p class="dream-lead">Give OneWM an initial observation and a task. It predicts the next actions, imagines their consequences, then uses <strong>its own predicted view</strong> to decide what to do next.</p>
+        </div>
+        <div class="dream-insight"><h3>An <em>Endless Dream</em></h3><p><span>After the first observation,</span> <strong>OneWM sees <em>only what it imagines.</em></strong></p></div>
+        <div class="dream-stage">
+          <div class="dream-video-heading"><div><p>OneWM · LIBERO</p><h3 class="dream-task-title">An imagined journey</h3></div><span class="dream-loop-count">Round 01 / 16</span></div>
+          <div class="dream-views">
+            <div class="dream-cinema">
+              <div class="dream-camera-labels" aria-hidden="true"><span>Scene view</span><span>Wrist view</span></div>
+              <div class="dream-screen"><video muted playsinline preload="auto" aria-label="OneWM imagined rollout: generated scene and wrist views"></video><span class="dream-state">Initial observation · held</span></div>
+            </div>
+            <aside class="dream-actions" aria-label="Predicted actions for this round">
+              <div class="dream-action-label"><h4>Predicted actions</h4><span class="dream-action-count">00 / 32</span></div>
+              <div class="dream-action-space">
+                <canvas tabindex="0" aria-label="3D relative predicted action path. Drag or use arrow keys to rotate. Press R to reset."></canvas>
+                <div class="dream-action-caption"><span>Relative action path</span><button type="button" class="dream-reset" aria-label="Reset predicted action view" title="Reset view">↺</button></div>
+                <div class="dream-action-values"><span>Δx <b class="dream-dx">—</b></span><span>Δy <b class="dream-dy">—</b></span><span>Δz <b class="dream-dz">—</b></span><span>Grip <b class="dream-grip">—</b></span></div>
+              </div>
+            </aside>
+          </div>
+          <div class="dream-player-controls"><button type="button" class="dream-play" aria-label="Play imagined rollout" disabled>▶</button><input class="dream-timeline" type="range" min="0" max="1000" value="0" aria-label="Imagined rollout timeline" disabled><span class="dream-time">0.0 / 25.6 s</span><label class="sr-only" for="dream-speed">Imagined rollout speed</label><select class="dream-speed" id="dream-speed" aria-label="Imagined rollout speed"><option value="0.5" selected>0.5×</option><option value="1">1×</option><option value="0.25">0.25×</option></select></div>
+          <div class="dream-round-track" aria-hidden="true"></div>
+          <ol class="dream-cycle" aria-label="How OneWM dreams and acts">
+            <li data-phase="actions" aria-current="step"><span class="dream-step-icon" aria-hidden="true">1</span><div><h4>Predict the next actions</h4><p>32 controls from the current view.</p></div></li>
+            <li data-phase="imagination"><span class="dream-step-icon" aria-hidden="true">2</span><div><h4>Imagine their effect</h4><p>8 future frames, guided by those actions.</p></div></li>
+            <li data-phase="feedback"><span class="dream-step-icon" aria-hidden="true">↺</span><div><h4>Use the last imagined frame</h4><p>Feed it back. The next round begins.</p></div></li>
+          </ol>
+          <p class="dream-error" role="status" hidden></p>
+        </div>
+        <div class="dream-cases" role="group" aria-label="Choose an imagined task"></div>
+        <div class="dream-bottom"><p>Unified causal training connects policy and world prediction: <strong>OneWM can carry a task forward inside a world it generates itself.</strong></p><details class="dream-details"><summary>About this finding</summary><p><strong>Selected task:</strong> <span class="dream-instruction"></span></p><p class="dream-facts">16 rounds · 512 predicted actions · 25.6 s in imagination</p><p>Each LIBERO example starts from one dual-camera observation and a task instruction. The same OneWM checkpoint alternates action prediction and action-conditioned video prediction. Every later visual input is its own last generated frame; no later recorded observations or recorded actions enter the loop.</p><p>The animation reveals each saved 32-action prediction in temporal order, then plays its corresponding eight future frames. The 3D path accumulates the predicted translation commands within each round; it is a relative control path, not a measured end-effector trajectory. Values use the experiment’s denormalized actions. The pauses illustrate the loop, not inference speed.</p><p>All six examples retain the full 16 rounds. This experiment evaluates imagined task progression. Simulator execution and automatic completion detection are outside this experiment; long rollouts can show drift and generation artifacts.</p></details></div>
+      </div>
+    </section>
+
+    <section class="results-section page-width section-space" id="results">
+      <div class="results-compact-heading"><div><p class="chapter">06 / WHAT WE FIND</p><h2 class="section-title">Better at <em>both.</em></h2></div><p>Matched comparisons support reciprocal benefits.</p></div>
+      <div class="evidence-strip"><div class="evidence-direction"><span class="result-direction">WORLD → ACTION</span><p>Policy success</p><small>vs. WAM<sub>mask</sub></small></div><div><strong>94.95<small>%</small></strong><span>LIBERO <b>+2.50 pp</b></span></div><div><strong>59.27<small>%</small></strong><span>LIBERO-Plus <b>+5.90 pp</b></span></div><div><strong>36.68<small>%</small></strong><span>RoboCasa365 <b>+8.36 pp</b></span></div><div class="world-evidence"><span class="result-direction blue-text">ACTION → WORLD</span><p>Better PSNR, SSIM & LPIPS</p><small>Across all three benchmarks, against the same-architecture world model.</small></div></div>
+      <details class="results-detail"><summary>A closer look at the numbers <span>+</span></summary><div><p><strong>Real-world success:</strong> 48.9% → 66.7%, WAM<sub>mask</sub> → OneWM. Three tasks; 15 trials per task and model.</p><p><strong>World prediction, PSNR ↑:</strong> LIBERO 22.33 → 22.95 · LIBERO-Plus 20.54 → 21.05 · RoboCasa365 24.72 → 25.21. Same MoT architecture, WM → OneWM.</p><p>Selected paper results. Distributional metrics and individual perturbation categories show a more nuanced picture.</p></div></details>
+    </section>
+
+    <section class="closing-section page-width" id="paper"><div class="closing-mark">✳</div><h2>Understanding the world<br> by <em>learning to act in it.</em></h2><p>Explore the architecture, experiments, and findings in the paper.</p><a class="button primary resource-link" href="" aria-disabled="true" title="Link coming soon">Paper coming soon</a><details class="paper-details"><summary>Paper details</summary><p><strong>Can World and Action Modeling Benefit Each Other under Unified Causal Training?</strong></p><p>Yue Su, Bokai Lin, Xinkai Wang, Chubin Zhang, Xiangnan Wu, Kuan Zhang, Weiyang Jin, Jiwen Yu, Yiming Li, Cewu Lu, Lixin Yang, Xihui Liu.</p></details></section>
+  </main>
+  <footer class="page-width"><a class="brand" href="#top">One<span class="rose">WM</span><span class="footer-tagline">World & action, learning together.</span></a><a href="https://selen-suyue.github.io/" target="_blank" rel="noopener">Yue Su’s homepage ↗</a></footer>
+  <div id="page-progress" aria-hidden="true"></div>
+</body>
+</html>
