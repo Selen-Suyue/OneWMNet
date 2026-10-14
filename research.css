@@ -68,6 +68,17 @@ body{color:var(--ink)}.site-header{background:#fbf9f7ed}.site-header nav a,.head
 .resource-link:focus-visible{outline:2px solid #c5d5e6;outline-offset:5px;border-radius:3px}
 .hero .hero-intro{margin-top:21px;font-size:16px;line-height:1.65}
 .hero .hero-actions{margin-top:23px}
+.music-toggle{padding:6px 0;border:0;background:none;white-space:nowrap;gap:11px;min-height:44px}
+.music-toggle:hover{color:#9585a4}
+.music-icon{width:34px;height:34px;flex:none;display:grid;place-items:center;border:1px solid #d2c6dc;border-radius:50%;color:#a192af;background:#f7f3f9;transition:background .25s,border-color .25s}
+.music-note{width:20px;height:20px}
+.music-bars{display:none;height:17px;align-items:center;justify-content:center;gap:3px}
+.music-bars i{display:block;width:2px;height:14px;border-radius:2px;background:currentColor;animation:music-wave .85s ease-in-out infinite alternate}
+.music-bars i:nth-child(2){height:10px;animation-delay:-.35s}.music-bars i:nth-child(3){height:17px;animation-delay:-.6s}.music-bars i:nth-child(4){height:8px;animation-delay:-.15s}
+.music-toggle.is-playing .music-icon{background:#eee7f4;border-color:#c9bbd6}.music-toggle.is-playing .music-note{display:none}.music-toggle.is-playing .music-bars{display:flex}
+@keyframes music-wave{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+@media(prefers-reduced-motion:reduce){.music-bars i{animation:none}}
+@media(max-width:560px){.hero .hero-actions{gap:18px;flex-wrap:wrap}.music-toggle{gap:9px}}
 .hero .art-frame{height:419px}
 @media(max-width:1100px){.hero{gap:35px;grid-template-columns:1.15fr .85fr}.hero .hero-paper-title{font-size:41px}.hero .hero-paper-title .hero-title-context{font-size:31px}.hero-wordmark{font-size:38px}.hero .art-frame{height:395px}}
 @media(max-width:800px){.hero{gap:27px;grid-template-columns:1.2fr .8fr;padding-block:36px 41px;min-height:0}.hero .hero-paper-title{font-size:34px;margin-top:17px}.hero .hero-paper-title .hero-title-context{font-size:28px;margin-top:10px}.hero-wordmark{font-size:34px}.hero .hero-intro{font-size:14px;margin-top:17px}.hero .hero-intro br{display:none}.hero .art-frame{height:338px}.site-header nav a[href="#dreaming"]{display:block}}

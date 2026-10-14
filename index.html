@@ -33,7 +33,9 @@
           <a class="resource-link" href="" aria-disabled="true" title="Link coming soon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 3 14 18M18 3l-5.5 7M10.5 13 5 21"/><path d="m8 3 11 14" opacity=".4"/></svg><span>arXiv</span></a>
         </div>
         <p class="hero-intro">One causal model learns to predict the world<br> and act in it.</p>
-        <div class="hero-actions"><a class="button primary" href="#story">Explore the idea <span>↗</span></a><a class="text-link" href="#experiments"><span class="play-small">▶</span> See it in action</a></div>
+        <div class="hero-actions"><a class="button primary" href="#story">Explore the idea <span>↗</span></a><button class="text-link music-toggle" id="music-toggle" type="button" aria-pressed="false" aria-controls="page-music" aria-label="Play background music" title="みちしるべ — 茅原実里"><span class="music-icon" aria-hidden="true"><svg class="music-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17V6l9-2v11M10 9l9-2"/><ellipse cx="7" cy="17.5" rx="3" ry="2.5"/><ellipse cx="16" cy="15.5" rx="3" ry="2.5"/></svg><span class="music-bars"><i></i><i></i><i></i><i></i></span></span><span class="music-label">Play music</span></button></div>
+        <audio id="page-music" src="assets/audio/michishirube.mp3" preload="none" loop></audio>
+        <span class="sr-only" id="music-status" role="status"></span>
       </div>
       <div class="hero-art" aria-label="Anime illustration of a robot learning to manipulate blocks">
         <div class="art-frame"><img src="assets/art/hero.png" alt="An illustrated white robot arm arranging rose and blue blocks in a sunlit studio" fetchpriority="high" width="1536" height="1024"><div class="art-grain"></div></div>

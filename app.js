@@ -9,6 +9,70 @@ $$('.resource-link[href=""]').forEach(link => {
   link.addEventListener('click', event => event.preventDefault());
 });
 
+// Background music starts only from the listener's explicit click.
+const music = $('#page-music');
+const musicToggle = $('#music-toggle');
+const musicStatus = $('#music-status');
+let musicWanted = false;
+let musicRequest = 0;
+let musicFade = 0;
+music.volume = 0;
+
+const updateMusicToggle = () => {
+  musicToggle.setAttribute('aria-pressed', String(musicWanted));
+  musicToggle.setAttribute('aria-label', musicWanted ? 'Pause background music' : 'Play background music');
+  $('.music-label').textContent = musicWanted ? 'Pause music' : 'Play music';
+};
+
+const fadeMusic = (target, onComplete = () => {}) => {
+  clearInterval(musicFade);
+  const initial = music.volume;
+  const start = performance.now();
+  const step = () => {
+    const progress = Math.min((performance.now() - start) / 450, 1);
+    music.volume = initial + (target - initial) * progress;
+    if (progress === 1) {
+      clearInterval(musicFade);
+      onComplete();
+    }
+  };
+  musicFade = setInterval(step, 20);
+};
+
+musicToggle.addEventListener('click', async () => {
+  musicWanted = !musicWanted;
+  const request = ++musicRequest;
+  clearInterval(musicFade);
+  musicStatus.textContent = '';
+  updateMusicToggle();
+  if (!musicWanted) {
+    musicToggle.classList.remove('is-playing');
+    fadeMusic(0, () => { if (!musicWanted) music.pause(); });
+    return;
+  }
+  try {
+    await music.play();
+    if (request !== musicRequest || !musicWanted) return;
+    musicToggle.classList.add('is-playing');
+    fadeMusic(0.35);
+  } catch {
+    if (request !== musicRequest) return;
+    musicWanted = false;
+    musicToggle.classList.remove('is-playing');
+    updateMusicToggle();
+    musicStatus.textContent = 'Music could not start. Please try again.';
+  }
+});
+
+music.addEventListener('pause', () => {
+  musicWanted = false;
+  ++musicRequest;
+  clearInterval(musicFade);
+  music.volume = 0;
+  musicToggle.classList.remove('is-playing');
+  updateMusicToggle();
+});
+
 // The article's progress and chapter navigation are independent of media playback.
 const updateProgress = () => {
   const length = document.documentElement.scrollHeight - innerHeight;
