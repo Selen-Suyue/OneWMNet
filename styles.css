@@ -24,3 +24,6 @@
 @media(max-width:1100px){.authors-block>p{font-size:11px;gap:9px 17px}.hero-footnote{font-size:9px}}
 @media(max-width:800px){.authors-block>p{font-size:11px}.institutions{font-size:10px}.action-readout{font-size:11px}}
 @media(max-width:560px){.authors-block>p{font-size:10px;gap:10px 15px}.institutions{font-size:9px}.section-note{font-size:10px}.hero-footnote{font-size:9px}.site-header nav a{font-size:10px}.action-readout{font-size:10px;flex-wrap:wrap}.action-rotation{font-size:9px}.trajectory-semantics{font-size:9px}.studio-caption>span{font-size:10px}.results-caveat{font-size:10px}}
+
+/* Public arXiv citation */
+.citation-block{max-width:850px;margin:48px auto 0;text-align:left}.citation-block h3{margin:0 0 12px;font-size:24px;font-weight:600;letter-spacing:-.02em}.citation-block p{margin:0 0 18px;font-size:16px;line-height:1.7;color:var(--ink)}.citation-block pre{margin:0;padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);font:14px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}.citation-block code{font:inherit}.citation-block pre:focus-visible{outline:2px solid var(--blue);outline-offset:4px}@media(max-width:560px){.citation-block{margin-top:36px}.citation-block pre{padding:18px;font-size:13px}}
